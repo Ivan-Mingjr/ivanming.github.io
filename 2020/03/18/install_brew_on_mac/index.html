@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    Hello World |
+    install_brew_on_mac |
     
     Hexo</title>
   
@@ -29,7 +29,7 @@
 <body>
 <main class="content">
   <section class="outer">
-  <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  <article id="post-install_brew_on_mac" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
     <div class="article-inner">
         
@@ -37,7 +37,7 @@
                 
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      install_brew_on_mac
     </h1>
   
   
@@ -50,8 +50,8 @@
 
                 
                     <div class="article-meta">
-                        <a href="/2020/03/18/hello-world/" class="article-date">
-  <time datetime="2020-03-18T10:19:18.192Z" itemprop="datePublished">2020-03-18</time>
+                        <a href="/2020/03/18/install_brew_on_mac/" class="article-date">
+  <time datetime="2020-03-18T07:46:11.731Z" itemprop="datePublished">2020-03-18</time>
 </a>
                             
                     </div>
@@ -74,24 +74,39 @@
                                             
 
                                                 
-                                                                    <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+                                                                    <p>默认使用官网的安装命令，会通过github下载brew、core的源码：<br><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code></p>
+<p>但国内访问GitHub实在垃圾，根本就没有办法完成安装，会卡在brew源码的clone过程中,shell 里显示：<br><code>==&gt; Tapping homebrew/core
+Cloning into &#39;/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core&#39;...</code></p>
+<p><em>中科大源</em>提供了brew的国内镜像，速度非常快，经过在网上查找相关的攻略，完成了brew2.0.1的安装。</p>
+<h3 id="安装brew"><a href="#安装brew" class="headerlink" title="安装brew"></a>安装brew</h3><p>通过如下命令下载brew的安装脚本</p>
+<p><code>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install &gt;&gt; brew_install</code></p>
+<h3 id="修改安装脚本中的配置项：BREW-REPO"><a href="#修改安装脚本中的配置项：BREW-REPO" class="headerlink" title="修改安装脚本中的配置项：BREW_REPO"></a>修改安装脚本中的配置项：BREW_REPO</h3><p>此时上个步骤中下载到的脚本打开并修改：</p>
+<p><code>#BREW_REPO = &quot;https://github.com/Homebrew/brew&quot;.freeze #修改前的配置
+BREW_REPO = &quot;https://mirrors.ustc.edu.cn/brew.git&quot;.freeze #修改后的配置</code></p>
+<p>然后执行ruby brew_install进行brew的安装。</p>
+<p>安装过程中依旧会卡在brew-core这儿</p>
+<p><code>==&gt; Tapping homebrew/core
+Cloning into &#39;/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core&#39;...</code></p>
+<p>这时不用理会，用ctrl+c中断此次安装，并用<code>brew --version</code>命令验证brew是否已经完成安装</p>
+<p><code>$ brew --version
+Homebrew 2.0.1
+Homebrew/homebrew-core (git revision 4f90; last commit 2019-02-12)</code></p>
+<h3 id="安装brew-core"><a href="#安装brew-core" class="headerlink" title="安装brew-core"></a>安装brew-core</h3><p>执行如下命令从中科大的源获取core的源码</p>
+<p><code>git clone git://mirrors.ustc.edu.cn/homebrew-core.git/ /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core --depth=1</code></p>
+<h3 id="安装brew-cask"><a href="#安装brew-cask" class="headerlink" title="安装brew-cask"></a>安装brew-cask</h3><p>执行如下命令从中科大的源获取cask的源码</p>
+<p><code>git clone git://mirrors.ustc.edu.cn/homebrew-cask.git/ /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask --depth=1</code></p>
+<h3 id="配置bottles源"><a href="#配置bottles源" class="headerlink" title="配置bottles源"></a>配置bottles源</h3><p>使用的bash环境，直接运行如下两条命令即可</p>
+<p><code>echo &#39;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles&#39; &gt;&gt; ~/.bash_profile
+source ~/.bash_profile</code></p>
+<h3 id="收尾"><a href="#收尾" class="headerlink" title="收尾"></a>收尾</h3><p>执行如下三条命令进行更新和检测</p>
+<p>brew update</p>
+<p>brew doctor</p>
+<p>brew cask doctor</p>
+<h3 id="enjoy"><a href="#enjoy" class="headerlink" title="enjoy"></a>enjoy</h3>
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://yoursite.com/2020/03/18/hello-world/" data-id="ck7yggxkd0000uhp8gpd88971" class="article-share-link">
+                                        <a data-url="http://yoursite.com/2020/03/18/install_brew_on_mac/" data-id="ck7zla59m0000cpp826rx3x6z" class="article-share-link">
                                             Share
                                         </a>
                                         
@@ -136,7 +151,7 @@
 <nav class="navbar">
   
     <div class="logo">
-      <a href="/"><img src="/images/hexo.svg" alt="Hexo"></a>
+      <a href="/"><img src="/images/favicon.png" alt="Hexo"></a>
     </div>
   
   <ul class="nav nav-main">
